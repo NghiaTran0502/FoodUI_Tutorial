@@ -2,9 +2,20 @@ import React from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Home, Other, Restaurant} from './screens';
+import {Other, Restaurant} from './screens';
+import {Tabs} from './navigation/tabs';
+import {ICurrentLocation, IRestaurant} from './screens/Home';
 
 const Stack = createNativeStackNavigator();
+
+export type RootStackParamList = {
+  Home: undefined;
+  Restaurant: {
+    item: IRestaurant;
+    location: ICurrentLocation;
+  };
+  Other: undefined;
+};
 
 const App: React.FC = () => {
   return (
@@ -13,15 +24,12 @@ const App: React.FC = () => {
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName={'Home'}>
-        <Stack.Screen name="Home" component={Home} />
+        initialRouteName={'Tabs'}>
+        <Stack.Screen name="Tabs" component={Tabs} />
         <Stack.Screen name="Restaurant" component={Restaurant} />
         <Stack.Screen name="Other" component={Other} />
       </Stack.Navigator>
     </NavigationContainer>
-    // <View>
-    //   <Text>Hello</Text>
-    // </View>
   );
 };
 
